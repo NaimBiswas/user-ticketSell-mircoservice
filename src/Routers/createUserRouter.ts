@@ -19,6 +19,15 @@ Router.post('/create-user', async (req: any, res: any) => {
         res.send(result.error)
         return;
     }
+    const { email } = req.body
+    const allReadyExist = await User.find({ email })
+    if (allReadyExist && allReadyExist.length) {
+        res.status(400).json({
+            messsage: "User all ready exist with this email",
+            allReadyExist
+        })
+        return
+    }
     const newUsr = User.create({
         email: req.body.email,
         name: req.body.name,
