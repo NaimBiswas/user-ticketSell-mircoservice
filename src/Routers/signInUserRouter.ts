@@ -1,7 +1,10 @@
 const Router = require("express").Router();
 import { Request, Response } from 'express'
 import { signinUser } from '../middleware/validation';
+const jwt = require('jsonwebtoken')
 const User = require('../models/UserModels')
+
+
 Router.get('/signin', async (req: Request, res: Response) => {
     res.send("hello Signin World")
 })
@@ -24,10 +27,13 @@ Router.post('/signin', async (req: Request, res: Response) => {
     }
     const UserSignIn = await User.find({ email, password })
     if (UserSignIn) {
+        const token = jwt.sign({ UserSignIn }, 'NaimBiswas')
         res.status(201).json({
             messsage: "User has been signed in",
-            UserSignIn
+            UserSignIn,
+            token
         })
+        await User.findOneAndUpdate({ email: email }, { $set: { token: token } })
     }
 })
 

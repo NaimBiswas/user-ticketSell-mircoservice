@@ -14,7 +14,7 @@ app.use(morgan('dev'))
 
 app.use('/api', getAllUsers)
 app.use('/api/users', signInUserRouter)
-app.use('/api', signOutUserRouter)
+app.use('/api/users', signOutUserRouter)
 app.use('/api/users', createUserRouter)
 
 app.get("/", (req, res) => res.send("User Service"))

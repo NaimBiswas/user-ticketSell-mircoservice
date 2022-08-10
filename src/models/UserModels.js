@@ -17,6 +17,9 @@ var userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  token: {
+    type: String,
+  },
 });
 //Export the model
 module.exports = User = mongoose.model("User", userSchema);
