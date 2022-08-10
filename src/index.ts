@@ -13,7 +13,7 @@ app.use(express.json())
 app.use(morgan('dev'))
 
 app.use('/api', getAllUsers)
-app.use('/api', signInUserRouter)
+app.use('/api/users', signInUserRouter)
 app.use('/api', signOutUserRouter)
 app.use('/api/users', createUserRouter)
 
