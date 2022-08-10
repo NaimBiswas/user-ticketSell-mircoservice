@@ -26,3 +26,5 @@ app.listen(port, () => {
     DbConnection
 }
 )
+
+export default app
